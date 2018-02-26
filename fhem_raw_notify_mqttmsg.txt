@@ -1,0 +1,5 @@
+defmod nTerrasse notify SD_WS07_TH_2:temperature:.*  { mqttmsg ("display1/text4", "Terrass ". ReadingsVal('SD_WS07_TH_2','temperature', '0').'°C');;;; }
+attr nTerrasse room MQTT
+
+setstate nTerrasse 2018-02-26 07:23:50
+setstate nTerrasse 2018-02-23 18:57:43 state active
