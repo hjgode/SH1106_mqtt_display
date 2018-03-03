@@ -24,6 +24,11 @@
  *
  */
 
+#define PIN_POWER D5
+long previousMillis = 0; 
+long interval = 1000;           // interval after which to shut down (milliseconds)
+long shutdown_counter=20;
+
 String myText1;
 String myText2;
 String myText3;
@@ -281,6 +286,9 @@ void reconnect() {
 //#################################################
 
 void setup() {
+  pinMode(PIN_POWER, OUTPUT);
+  digitalWrite(PIN_POWER, HIGH);
+  
   Serial.begin(115200);
   Serial.println();
   Serial.println();
@@ -334,6 +342,15 @@ const unsigned long REFRESH_INTERVAL = 1000; // ms
 unsigned long lastRefreshTime = 0;
 
 void loop() {
+  unsigned long currentMillis = millis();
+  if(currentMillis - previousMillis > interval) {
+    previousMillis = currentMillis;
+    shutdown_counter--;
+    if(shutdown_counter<0){
+      digitalWrite(PIN_POWER, LOW); //shutdown power
+    }
+  }
+  
   int remainingTimeBudget = ui.update();
   if(millis() - lastRefreshTime >= REFRESH_INTERVAL)
     {
