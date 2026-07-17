@@ -137,7 +137,8 @@ Reset: To reset the device the digital will help to reset it through the LOW sta
     Pin1
 */
 
-#define PIN_POWER (5)
+//power enable GPIO14
+#define PIN_POWER (14)
 long previousMillis = 0; 
 long interval = 1000;           // interval after which to shut down (milliseconds)
 long shutdown_counter=20;
@@ -208,6 +209,7 @@ PubSubClient client(espClient);
 
 
 // packages/esp8266/hardware/esp8266/2.6.2/variants/generic/pins_arduino.h
+// (x) means GPIOx
 // #define PIN_WIRE_SDA (4)
 // #define PIN_WIRE_SCL (5)
 // static const uint8_t SDA = PIN_WIRE_SDA;
@@ -410,7 +412,7 @@ void setup() {
   pinMode(PIN_POWER, OUTPUT);
   digitalWrite(PIN_POWER, HIGH);
   
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println('Hello');
   Serial.println();
 
